@@ -1,6 +1,6 @@
-# Analyzing and Comparing RNA-Binding Motifs in Human TDP43 and Its Interactors
+# RNA-Binding Motifs in Human TDP43 and Its Interactors
 
-## This project aims to identify RNA-binding motifs in the human TDP43 protein and compare these motifs to those found in proteins that interact with TDP43. By analyzing the conservation of these motifs across different interactors, we can gain insights into their functional significance in RNA-protein interactions.
+This project aims to identify RNA-binding motifs in the human TDP43 protein and compare these motifs to those found in proteins that interact with TDP43. By analyzing the conservation of these motifs across different interactors, we can gain insights into their functional significance in RNA-protein interactions.
 
 # Goals:
 1. Identify RNA-binding motifs in the human TDP43 protein.
