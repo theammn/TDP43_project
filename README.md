@@ -11,9 +11,6 @@ This project aims to identify RNA-binding motifs in the human TDP43 protein and 
 As input, we will have msas files from TDP43 and few targeted interactors.
 We try now to identify RNA-Binding Motifs and search for these motifs in the sequences of human TDP43 and its interactors, in order to then calculate conservation scores
 
-# Input:
-MSA (Multiple Sequence Alignment) files for human TDP43 and its targeted interactors.
-
 # Methodology:
 
 - Load MSA Data: Read the MSA files for human TDP43 and its interactors.
@@ -25,4 +22,5 @@ MSA (Multiple Sequence Alignment) files for human TDP43 and its targeted interac
 
 # Structure:
 Input : MSA (Multiple Sequence Alignment) files for human TDP43 and its targeted interactors (fasta files)
+
 Script : analyze_rna_binding_motifs.py
