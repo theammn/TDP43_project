@@ -55,5 +55,5 @@ def calculate_identity(sequence1, sequence2):
     return identity
 
 if __name__ == "__main__":
-    folder_path = 'msa'
+    folder_path = 'path_to_your_msas_files' #update this path when you download the files on your computer 
     main(folder_path)
