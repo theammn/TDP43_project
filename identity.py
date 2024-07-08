@@ -55,5 +55,5 @@ def calculate_identity(sequence1, sequence2):
     return identity
 
 if __name__ == "__main__":
-    folder_path = '/home/labs/hornsteinlab/theam/MLcourse/assignments/project/msa_files'  # Update with your folder path
+    folder_path = 'msa'
     main(folder_path)
