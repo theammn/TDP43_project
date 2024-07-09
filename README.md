@@ -12,7 +12,7 @@ Through this study, I hope to contribute to our understanding of ALS at a molecu
 1. Identify Sequence Identity: Compare the sequence identity between the human TDP43 protein and its potential interactors from multiple sequence alignment, fasta files.
 2. Understand Conservation: Analyze how conserved specific proteins are across different interactions with TDP43.
 
-As input, we will have msas files from TDP43 and few targeted interactors.
+As input, we will have fastas files from TDP43 and few targeted interactors.
 
 # Methodology:
 
