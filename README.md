@@ -27,6 +27,8 @@ As input, we will have msas files from TDP43 and few targeted interactors.
 Input : Fasta files for human TDP43 and its targeted interactors
 
 Script : 
-identity.py
-visualization.py
+```bash
+python identity.py
+python visualization.py
+```
 
