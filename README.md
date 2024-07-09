@@ -9,19 +9,24 @@ Pairwise identity, essentially the percentage of identical amino acids between t
 Through this study, I hope to contribute to our understanding of ALS at a molecular level. Ultimately, my goal is to pinpoint new avenues for therapeutic intervention or diagnostic strategies, bringing us closer to effective treatments for this devastating neurological disorder.
 
 # Goals:
-1. Identify Sequence Identity: Compare the sequence identity between the human TDP43 protein and its potential interactors from multiple sequence alignment (MSA) files.
+1. Identify Sequence Identity: Compare the sequence identity between the human TDP43 protein and its potential interactors from multiple sequence alignment, fasta files.
 2. Understand Conservation: Analyze how conserved specific proteins are across different interactions with TDP43.
 
 As input, we will have msas files from TDP43 and few targeted interactors.
 
 # Methodology:
 
+- Install the requirements 
 - Load MSA Data: Read the MSA files for human TDP43 and its interactors.
 - Identify the sequences.
 - Calculate Conservation Scores: Analyze how conserved motifs are across all sequences in the MSA files.
 - Calculate the scores of identity between TDP43 and the interactors
+- Visualize the list of proteins in bar plot
 
 # Structure:
-Input : MSA (Multiple Sequence Alignment) files for human TDP43 and its targeted interactors (fasta files)
+Input : Fasta files for human TDP43 and its targeted interactors
 
-Script : identity.py
+Script : 
+identity.py
+visualization.py
+
