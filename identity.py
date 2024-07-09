@@ -1,51 +1,32 @@
 import os
 from Bio import pairwise2
 from Bio.pairwise2 import format_alignment
+from Bio import SeqIO
+import csv
 
-def read_a3m(file_path):
-    with open(file_path, 'r') as file:
-        sequences = {}
-        header = ""
-        sequence = ""
-        for line in file:
-            line = line.strip()
-            if line.startswith(">"):
-                if header and sequence:
-                    sequences[header] = sequence
-                header = line[1:]  # Remove the '>'
-                sequence = ""
-            elif not line.startswith("#"):  # Skip comments
-                sequence += line.replace('.', '')  # Remove dots for alignments
-        if header and sequence:
-            sequences[header] = sequence
+def read_fasta(file_path):
+    sequences = {}
+    for record in SeqIO.parse(file_path, "fasta"):
+        sequences[record.id] = str(record.seq)
     return sequences
 
-def process_a3m_folder(folder_path):
-    all_sequences = {}
-    for filename in os.listdir(folder_path):
-        if filename.endswith(".a3m"):
-            file_path = os.path.join(folder_path, filename)
-            sequences = read_a3m(file_path)
-            if sequences:
-                header, sequence = next(iter(sequences.items()))  # Get the first sequence
-                all_sequences[header] = sequence
-            print(f"Processed {filename} with {len(sequences)} sequences.")
-    return all_sequences
+def process_fasta_files(tdp43_file, proteins_file):
+    tdp43_sequences = read_fasta(tdp43_file)
+    proteins_sequences = read_fasta(proteins_file)
 
-def main(folder_path):
-    all_sequences = process_a3m_folder(folder_path)
+    if not tdp43_sequences or 'TDP43' not in tdp43_sequences:
+        print("TDP43 sequence not found in the specified file.")
+        return
     
-    # Example: Print the first sequence of each file
-    for header, sequence in all_sequences.items():
-        print(f"Header: {header}\nSequence: {sequence[:60]}...\n")
+    tdp43_sequence = tdp43_sequences['TDP43']
+    identity_results = {}
+
+    for header, sequence in proteins_sequences.items():
+        identity = calculate_identity(tdp43_sequence, sequence)
+        identity_results[header] = identity
+        print(f"Sequence Identity between TDP43 and {header}: {identity:.2f}%")
     
-    # Compare TDP43 with each sequence in all_sequences
-    if 'TDP43' in all_sequences:
-        sequence_tdp43 = all_sequences['TDP43']
-        for header, sequence in all_sequences.items():
-            if header != 'TDP43':  # Skip comparing TDP43 with itself
-                identity = calculate_identity(sequence_tdp43, sequence)
-                print(f"Sequence Identity between TDP43 and {header}: {identity:.2f}%")
+    save_identity_scores(identity_results)
 
 def calculate_identity(sequence1, sequence2):
     alignments = pairwise2.align.globalxx(sequence1, sequence2)
@@ -54,6 +35,15 @@ def calculate_identity(sequence1, sequence2):
     identity = (score / len(sequence1)) * 100  # Calculate percentage identity
     return identity
 
+def save_identity_scores(identity_results):
+    with open('identity_scores.csv', mode='w', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(["Protein", "Identity Score"])
+        for protein, score in identity_results.items():
+            writer.writerow([protein, score])
+    print("Identity scores saved to identity_scores.csv")
+
 if __name__ == "__main__":
-    folder_path = 'path_to_your_msas_files' #update this path when you download the files on your computer 
-    main(folder_path)
+    tdp43_file = os.path.join('fasta', 'tdp43.fasta')  # Relative path to the TDP43 fasta file
+    proteins_file = os.path.join('fasta', 'proteins.fasta')  # Relative path to the proteins fasta file
+    process_fasta_files(tdp43_file, proteins_file)
